@@ -2,46 +2,41 @@ using UnityEngine;
 
 public class PlayerSwipe : MonoBehaviour
 {
+
     public Player player;
     private Vector2 startPos;
-    public int pixelDistance = 20;
+    public int pixelDistance = 50;
     private bool isFingerDown;
 
     private void Update()
     {
-        if (!isFingerDown && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) // detects if finger is down for the first time 
+        if (!isFingerDown && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-            startPos = Input.touches[0].position; // startPos is where we put our finger down
-            isFingerDown = true; //the finger is down on the screen
+            startPos = Input.touches[0].position;
+            isFingerDown = true;
         }
 
-        if (isFingerDown)
+        if (isFingerDown && Input.touchCount > 0)
         {
-            if (Input.touches[0].position.y >= startPos.y + pixelDistance)
-            {
-                isFingerDown = false;
-                Debug.Log("Up");
-                player.Move(Vector3.forward);
-            }
-            else if (Input.touches[0].position.y <= startPos.y - pixelDistance)
-            {
-                isFingerDown = false;
-                Debug.Log("Down");
-                player.Move(-Vector3.forward);
-            }
-            else if (Input.touches[0].position.x <= startPos.x - pixelDistance)
-            {
-                isFingerDown = false;
-                Debug.Log("Left");
-                player.Move(Vector3.left);
-            }
-            else if (Input.touches[0].position.x >= startPos.x + pixelDistance)
-            {
-                isFingerDown = false;
-                Debug.Log("Right");
-                player.Move(Vector3.right);
-            }
+            Vector2 currentPos = Input.touches[0].position;
+            Vector2 swipeDelta = currentPos - startPos;
 
+            if (swipeDelta.magnitude > pixelDistance)
+            {
+                isFingerDown = false;
+
+                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+                {
+                    // Horizontal swipe
+                    player.SetMoveDirection(swipeDelta.x > 0 ? Vector3.right : Vector3.left);
+                }
+                else
+                {
+                    // Vertical swipe
+                    player.SetMoveDirection(swipeDelta.y > 0 ? Vector3.forward : Vector3.back);
+                }
+            }
         }
     }
 }
+
