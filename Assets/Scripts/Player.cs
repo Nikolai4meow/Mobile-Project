@@ -46,6 +46,16 @@ public class Player : MonoBehaviour
         {
             StopMoving();
         }
+        else if (collision.gameObject.CompareTag("Zombie"))
+        {
+           StopMoving();
+
+            ZombieController zombie = collision.gameObject.GetComponent<ZombieController>();
+            if (zombie != null)
+            {
+                zombie.zombieHit();
+            }
+        }
     }
 }
 
