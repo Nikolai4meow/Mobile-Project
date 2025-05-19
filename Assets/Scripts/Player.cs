@@ -8,20 +8,23 @@ public class Player : MonoBehaviour
     private bool isMoving;
     private Rigidbody rb;
 
+    public bool IsMoving { get { return isMoving; } }
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); // Requires Rigidbody component
+        rb = GetComponent<Rigidbody>(); // requires Rigidbody component
         isMoving = false;
     }
 
     public void SetMoveDirection(Vector3 direction)
     {
-        if (direction != Vector3.zero)
+        if (!isMoving) // move only when the player is not moving
         {
-            moveDirection = direction.normalized; // Ensures consistent speed
-            isMoving = true;
+                moveDirection = direction.normalized; // gives move speed
+                isMoving = true;
         }
     }
+    
 
     public void StopMoving()
     {
@@ -32,17 +35,17 @@ public class Player : MonoBehaviour
     {
         if (isMoving)
         {
-            rb.linearVelocity = moveDirection * moveSpeed; // Continuous movement
+            rb.linearVelocity = moveDirection * moveSpeed; // continuous movement
         }
         else
         {
-            rb.linearVelocity = Vector3.zero; // Full stop
+            rb.linearVelocity = Vector3.zero; // stop
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall")) // Stops on wall collision
+        if (collision.gameObject.CompareTag("Wall")) // stops on wall collision
         {
             StopMoving();
         }

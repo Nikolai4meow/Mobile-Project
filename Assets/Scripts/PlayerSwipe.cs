@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerSwipe : MonoBehaviour
 {
-
     public Player player;
     private Vector2 startPos;
     public int pixelDistance = 50;
@@ -10,30 +9,70 @@ public class PlayerSwipe : MonoBehaviour
 
     private void Update()
     {
-        if (!isFingerDown && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        // Process keyboard input every frame
+        ProcessKeyboardInput();
+
+        // Only process touch input if player isn't moving
+        if (!player.IsMoving)
         {
-            startPos = Input.touches[0].position;
-            isFingerDown = true;
+            ProcessTouchInput();
         }
-
-        if (isFingerDown && Input.touchCount > 0)
+        else
         {
-            Vector2 currentPos = Input.touches[0].position;
-            Vector2 swipeDelta = currentPos - startPos;
+            isFingerDown = false;
+        }
+    }
 
-            if (swipeDelta.magnitude > pixelDistance)
+    private void ProcessKeyboardInput()
+    {
+        // Only process keyboard input if player isn't moving
+        if (!player.IsMoving)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                isFingerDown = false;
+                player.SetMoveDirection(Vector3.forward);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                player.SetMoveDirection(Vector3.back);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                player.SetMoveDirection(Vector3.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                player.SetMoveDirection(Vector3.right);
+            }
+        }
+    }
 
-                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+    private void ProcessTouchInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            if (!isFingerDown && Input.touches[0].phase == TouchPhase.Began)
+            {
+                startPos = Input.touches[0].position;
+                isFingerDown = true;
+            }
+
+            if (isFingerDown)
+            {
+                Vector2 currentPos = Input.touches[0].position;
+                Vector2 swipeDelta = currentPos - startPos;
+
+                if (swipeDelta.magnitude > pixelDistance)
                 {
-                    // Horizontal swipe
-                    player.SetMoveDirection(swipeDelta.x > 0 ? Vector3.right : Vector3.left);
-                }
-                else
-                {
-                    // Vertical swipe
-                    player.SetMoveDirection(swipeDelta.y > 0 ? Vector3.forward : Vector3.back);
+                    isFingerDown = false;
+                    if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+                    {
+                        player.SetMoveDirection(swipeDelta.x > 0 ? Vector3.right : Vector3.left);
+                    }
+                    else
+                    {
+                        player.SetMoveDirection(swipeDelta.y > 0 ? Vector3.forward : Vector3.back);
+                    }
                 }
             }
         }
