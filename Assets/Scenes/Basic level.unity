@@ -298,8 +298,8 @@ Transform:
   m_GameObject: {fileID: 27020050}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: -1, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.5436, y: -1, z: -1}
+  m_LocalScale: {x: 0.9127, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 280133329}
@@ -384,8 +384,8 @@ Transform:
   m_GameObject: {fileID: 97400410}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 1, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.5005, y: 1, z: -1}
+  m_LocalScale: {x: 0.9990651, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 808307195}
@@ -524,15 +524,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.x
-      value: 0.99
+      value: 1.008203
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.y
-      value: 0.99
+      value: 0.9772443
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.z
       value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0063257217
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.y
+      value: 0.006377846
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.z
+      value: -2.0387633e-17
       objectReference: {fileID: 0}
     - target: {fileID: 3409790973481246183, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: zombieData
@@ -1802,8 +1814,8 @@ Transform:
   m_GameObject: {fileID: 729360876}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4999998, y: 2, z: -1}
-  m_LocalScale: {x: 1, y: 3.0001502, z: 1}
+  m_LocalPosition: {x: 3.5338, y: 2, z: -1}
+  m_LocalScale: {x: 0.967215, y: 3.0001502, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 269197221}
@@ -1880,8 +1892,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99, y: 0.99, z: 0.99}
-  m_Center: {x: 0, y: 0.00000017881393, z: -0.00000023841858}
+  m_Size: {x: 0.9413389, y: 0.99, z: 0.99}
+  m_Center: {x: 0.024330556, y: 0.0000001986722, z: -0.00000023841858}
 --- !u!1 &790294631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,8 +3022,8 @@ Transform:
   m_GameObject: {fileID: 1457141677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4999998, y: -2, z: -1}
-  m_LocalScale: {x: 1, y: 3.0001502, z: 1}
+  m_LocalPosition: {x: 3.5338, y: -2, z: -1}
+  m_LocalScale: {x: 0.93250847, y: 3.0001502, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 269197221}
@@ -3088,8 +3100,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99, y: 0.99, z: 0.99}
-  m_Center: {x: 0, y: -0.00000011920929, z: -0.00000023841858}
+  m_Size: {x: 0.90933216, y: 0.99, z: 0.99}
+  m_Center: {x: 0.040333927, y: -0.000000119203314, z: -0.00000023841856}
 --- !u!1 &1460674649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3697,15 +3709,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.x
-      value: 0.99
+      value: 0.98341787
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.y
-      value: 0.99
+      value: 0.9934287
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.z
-      value: 0.99
+      value: 0.69907445
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0032910705
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0017142892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.z
+      value: 0.14546281
       objectReference: {fileID: 0}
     - target: {fileID: 3409790973481246183, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: zombieData
@@ -3921,8 +3945,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99, y: 0.99, z: 0.99}
-  m_Center: {x: 0, y: 0.00000047683716, z: -0.00000023841858}
+  m_Size: {x: 0.9592541, y: 0.99, z: 0.99}
+  m_Center: {x: 0.015372962, y: 0.0000004768849, z: -0.00000023841858}
 --- !u!1 &1937667547
 GameObject:
   m_ObjectHideFlags: 0
@@ -4045,15 +4069,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.x
-      value: 0.99
+      value: 1.0095017
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.y
-      value: 0.99
+      value: 1.0135698
       objectReference: {fileID: 0}
     - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_Size.z
       value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.x
+      value: 0.018777251
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.y
+      value: -0.011784911
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828190158768847466, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
+      propertyPath: m_Center.z
+      value: 5.4570892e-17
       objectReference: {fileID: 0}
     - target: {fileID: 3409790973481246183, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: zombieData
@@ -4073,7 +4109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7623397877002602494, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 7623397877002602494, guid: 8683141c1eef6cf4ab022f5921bd2b53, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4128,6 +4164,7 @@ GameObject:
   - component: {fileID: 2070239776}
   - component: {fileID: 2070239775}
   - component: {fileID: 2070239774}
+  - component: {fileID: 2070239778}
   m_Layer: 0
   m_Name: Exit (win)
   m_TagString: Wall
@@ -4219,12 +4256,33 @@ Transform:
   m_GameObject: {fileID: 2070239773}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: -0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.7472, y: -0, z: -1}
+  m_LocalScale: {x: 0.5055, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1202233235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2070239778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070239773}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7336743, y: 1.0000002, z: 1.0000002}
+  m_Center: {x: 0.13316286, y: 8.077936e-28, z: -0.00000023841858}
 --- !u!1 &2088136944
 GameObject:
   m_ObjectHideFlags: 0
