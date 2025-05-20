@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Zombie
+  - Flag
   layers:
   - Default
   - TransparentFX
