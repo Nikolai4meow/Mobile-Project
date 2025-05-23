@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
             ZombieController zombie = collision.gameObject.GetComponent<ZombieController>();
             if (zombie != null)
             {
-                zombie.zombieHit();
+                zombie.TakeDamage();
             }
         }
     }
