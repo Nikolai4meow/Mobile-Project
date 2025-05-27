@@ -8,6 +8,7 @@ public class FinishFlagWin : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("YOU WON!");
+            LevelManager.Instance.ShowLevelComplete();
         }
     }
 }
