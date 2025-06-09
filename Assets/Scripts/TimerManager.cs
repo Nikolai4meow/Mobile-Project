@@ -5,7 +5,7 @@ using TMPro;
 
 public class TimerManager : MonoBehaviour
 {
-    public static TimerManager Instance;
+    public static TimerManager Instance; // singleton
 
     [Header("Settings")]
     public float levelTime = 20f; // Set this per level
