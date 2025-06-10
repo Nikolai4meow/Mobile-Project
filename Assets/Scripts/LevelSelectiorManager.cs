@@ -26,7 +26,7 @@ public class LevelSelectionManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
+   public void OnEnable()
     {
         UpdateAllButtons();
     }

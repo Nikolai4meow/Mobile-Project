@@ -53,6 +53,5 @@ public class LevelManager : MonoBehaviour
         LevelSelectionManager.Instance.CompleteLevel(1);
         SceneManager.LoadScene("LevelSelection");
 
-  ;
     }
 }

@@ -3453,6 +3453,10 @@ PrefabInstance:
       propertyPath: levelCompletePanel
       value: 
       objectReference: {fileID: 347385949}
+    - target: {fileID: 4349816149706871730, guid: d6c0921a1de982c4b9a2a034dfe28dc9, type: 3}
+      propertyPath: levelSelectionManager
+      value: 
+      objectReference: {fileID: 4713602872256438600, guid: 13abf0edaf565034186952bc365657e4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
