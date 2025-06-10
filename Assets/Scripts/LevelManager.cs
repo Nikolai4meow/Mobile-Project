@@ -50,9 +50,9 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LevelSelectionManager.Instance.CompleteLevel(1);
+        SceneManager.LoadScene("LevelSelection");
 
-       
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+  ;
     }
 }
