@@ -49,9 +49,10 @@ public class LevelManager : MonoBehaviour
     private void NextLevel()
     {
         Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+        LevelSelectionManager.Instance.CompleteLevel(1); // Pass the level number just completed
         
-        LevelSelectionManager.Instance.CompleteLevel(1);
-        SceneManager.LoadScene("LevelSelection");
+
 
     }
 }

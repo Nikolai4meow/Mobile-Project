@@ -6,6 +6,7 @@ public class LevelSelectionManager : MonoBehaviour
 {
     public static LevelSelectionManager Instance;
 
+    [Header("UI References")]
     public Button[] levelButtons;
     public Sprite[] numberSprites;
     public Sprite lockSprite;
@@ -14,32 +15,35 @@ public class LevelSelectionManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            LoadProgress();
+            if (LevelSelectionManager.Instance == null)
+            {
+                Instantiate(Resources.Load<GameObject>("LevelSelectionManager"));
+            }
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-   public void OnEnable()
+    void OnDestroy()
     {
-        UpdateAllButtons();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "LevelSelection")
+        {
+            UpdateAllButtons();
+        }
     }
 
     void LoadProgress()
     {
         highestUnlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
-    }
-
-    void SaveProgress()
-    {
-        PlayerPrefs.SetInt("UnlockedLevel", highestUnlockedLevel);
-        PlayerPrefs.Save();
+        Debug.Log($"Loaded progress. Highest unlocked: {highestUnlockedLevel}");
     }
 
     public void CompleteLevel(int completedLevel)
@@ -47,7 +51,39 @@ public class LevelSelectionManager : MonoBehaviour
         if (completedLevel >= highestUnlockedLevel)
         {
             highestUnlockedLevel = completedLevel + 1;
-            SaveProgress();
+            PlayerPrefs.SetInt("UnlockedLevel", highestUnlockedLevel);
+            PlayerPrefs.Save();
+            Debug.Log($"Unlocked up to level {highestUnlockedLevel}");
+        }
+    }
+
+    public void UpdateAllButtons()
+    {
+        if (levelButtons == null || levelButtons.Length == 0)
+        {
+            Debug.LogError("Level buttons not assigned!");
+            return;
+        }
+
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            int levelNumber = i + 1;
+            bool isUnlocked = levelNumber <= highestUnlockedLevel;
+
+            if (levelButtons[i] == null) continue;
+
+            // Update button appearance
+            levelButtons[i].interactable = isUnlocked;
+
+            Image buttonImage = levelButtons[i].GetComponentInChildren<Image>();
+            if (buttonImage != null)
+            {
+                buttonImage.sprite = isUnlocked ? numberSprites[i] : lockSprite;
+            }
+
+            // Clear and re-assign click handler
+            levelButtons[i].onClick.RemoveAllListeners();
+            levelButtons[i].onClick.AddListener(() => LoadLevel(levelNumber));
         }
     }
 
@@ -55,23 +91,13 @@ public class LevelSelectionManager : MonoBehaviour
     {
         if (levelNumber <= highestUnlockedLevel)
         {
-            SceneManager.LoadScene("Level" + levelNumber);
+            string sceneName = "Level" + levelNumber;
+            Debug.Log($"Loading {sceneName}");
+            SceneManager.LoadScene(sceneName);
         }
-    }
-
-    public void UpdateAllButtons()
-    {
-        for (int i = 0; i < levelButtons.Length; i++)
+        else
         {
-            int levelIndex = i + 1;
-            bool isUnlocked = levelIndex <= highestUnlockedLevel;
-
-            levelButtons[i].interactable = isUnlocked;
-            levelButtons[i].GetComponentInChildren<Image>().sprite = isUnlocked ? numberSprites[i] : lockSprite;
-
-            // Clear and re-add listeners
-            levelButtons[i].onClick.RemoveAllListeners();
-            levelButtons[i].onClick.AddListener(() => LoadLevel(levelIndex));
+            Debug.Log($"Level {levelNumber} is locked!");
         }
     }
 }
