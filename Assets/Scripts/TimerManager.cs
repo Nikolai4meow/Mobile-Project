@@ -5,10 +5,11 @@ using TMPro;
 
 public class TimerManager : MonoBehaviour
 {
-    public static TimerManager Instance; // singleton
+    public static TimerManager Instance;
 
     [Header("Settings")]
-    public float levelTime = 20f; // Set this per level
+    public float baseLevelTime = 10f; // Base time for medium difficulty
+    public DifficultySettings difficultySettings;
 
     [Header("UI References")]
     public TMP_Text timerText;
@@ -17,6 +18,7 @@ public class TimerManager : MonoBehaviour
 
     private float currentTime;
     private bool timerActive;
+    private float levelTime; // Actual time after difficulty adjustments
 
     private void Awake()
     {
@@ -32,14 +34,33 @@ public class TimerManager : MonoBehaviour
 
     private void Start()
     {
+        ApplyDifficultySettings();
         currentTime = levelTime;
         timerActive = true;
         gameOverPanel.SetActive(false);
-
         restartButton.onClick.AddListener(RestartLevel);
         UpdateTimerDisplay();
     }
 
+    private void ApplyDifficultySettings()
+    {
+        if (difficultySettings == null) return;
+
+        switch (difficultySettings.currentDifficulty)
+        {
+            case DifficultySettings.Difficulty.Easy:
+                levelTime = baseLevelTime + difficultySettings.easyTimeBonus;
+                break;
+            case DifficultySettings.Difficulty.Medium:
+                levelTime = baseLevelTime;
+                break;
+            case DifficultySettings.Difficulty.Hard:
+                levelTime = baseLevelTime - difficultySettings.hardTimePenalty;
+                break;
+        }
+    }
+
+    // Rest of your existing methods...
     private void Update()
     {
         if (timerActive)
@@ -60,20 +81,21 @@ public class TimerManager : MonoBehaviour
     {
         timerText.text = Mathf.CeilToInt(currentTime).ToString();
 
-        if (currentTime <= 5f) // Flash when time is low
+        if (currentTime <= 5f)
         {
             timerText.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 0.5f));
         }
     }
+
     private void GameOver()
-    { 
-        Time.timeScale = 0f; // Pause game
+    {
+        Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
     }
 
     public void RestartLevel()
     {
-        Time.timeScale = 1f; // Unpause game
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
