@@ -57,32 +57,54 @@ public class LevelSelectionManager : MonoBehaviour
     void LoadProgress()
     {
         // Force reset if corrupted
-        if (PlayerPrefs.HasKey("UnlockedLevel"))
+        /*  if (PlayerPrefs.HasKey("UnlockedLevel"))
+          {
+              int savedLevel = PlayerPrefs.GetInt("UnlockedLevel");
+              highestUnlockedLevel = (savedLevel >= 1 && savedLevel <= levelButtons.Length)
+                  ? savedLevel
+                  : 1;
+          }
+          */ //Debug.Log($"Loaded progress. Highest unlocked: {highestUnlockedLevel}");
+             // Try JSON first, fallback to PlayerPrefs
+        if (SaveManager.Instance != null)
         {
-            int savedLevel = PlayerPrefs.GetInt("UnlockedLevel");
-            highestUnlockedLevel = (savedLevel >= 1 && savedLevel <= levelButtons.Length)
-                ? savedLevel
-                : 1;
+            highestUnlockedLevel = SaveManager.Instance.LoadUserProgress();
         }
-        Debug.Log($"Loaded progress. Highest unlocked: {highestUnlockedLevel}");
+        else
+        {
+            highestUnlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        }
     }
 
     public void CompleteLevel(int completedLevel)
     {
         Debug.Log($"Completing level {completedLevel}. Current highest: {highestUnlockedLevel}");
 
-    
+
         // Prevent unlocking beyond the last level
-        if (completedLevel >= levelButtons.Length) return;
+        // if (completedLevel >= levelButtons.Length) return;
+
+        // if (completedLevel >= highestUnlockedLevel - 1)
+        // {
+        //    highestUnlockedLevel = Mathf.Min(completedLevel + 1, levelButtons.Length);
+        //   PlayerPrefs.SetInt("UnlockedLevel", highestUnlockedLevel);
+        //   PlayerPrefs.Save();
+        //   }
+        // UpdateAllButtons();
 
         if (completedLevel >= highestUnlockedLevel - 1)
         {
-            highestUnlockedLevel = Mathf.Min(completedLevel + 1, levelButtons.Length);
+            highestUnlockedLevel = completedLevel + 1;
+
+            // Save to both systems
+            if (SaveManager.Instance != null)
+            {
+                SaveManager.Instance.SaveProgress(highestUnlockedLevel);
+            }
             PlayerPrefs.SetInt("UnlockedLevel", highestUnlockedLevel);
-            PlayerPrefs.Save();
         }
         UpdateAllButtons();
-    
+
     }
 
     void UpdateAllButtons()
