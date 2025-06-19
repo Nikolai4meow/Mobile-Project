@@ -31,6 +31,7 @@ public class LevelSelectionManager : MonoBehaviour
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+    
 
     void OnDestroy()
     {
@@ -56,19 +57,18 @@ public class LevelSelectionManager : MonoBehaviour
 
     void LoadProgress()
     {
-        // Force reset if corrupted
-        /*  if (PlayerPrefs.HasKey("UnlockedLevel"))
-          {
-              int savedLevel = PlayerPrefs.GetInt("UnlockedLevel");
-              highestUnlockedLevel = (savedLevel >= 1 && savedLevel <= levelButtons.Length)
-                  ? savedLevel
-                  : 1;
-          }
-          */ //Debug.Log($"Loaded progress. Highest unlocked: {highestUnlockedLevel}");
-             // Try JSON first, fallback to PlayerPrefs
         if (SaveManager.Instance != null)
         {
-            highestUnlockedLevel = SaveManager.Instance.LoadUserProgress();
+            highestUnlockedLevel = SaveManager.Instance.GetCurrentUserProgress();
+
+            // NEW: Validation check
+            if (highestUnlockedLevel < 1)
+            {
+                highestUnlockedLevel = 1;
+                Debug.LogWarning($"Resetting invalid progress to Level 1");
+            }
+
+            Debug.Log($"Loaded: {SaveManager.Instance.CurrentUser} - Level {highestUnlockedLevel}");
         }
         else
         {
@@ -80,17 +80,6 @@ public class LevelSelectionManager : MonoBehaviour
     {
         Debug.Log($"Completing level {completedLevel}. Current highest: {highestUnlockedLevel}");
 
-
-        // Prevent unlocking beyond the last level
-        // if (completedLevel >= levelButtons.Length) return;
-
-        // if (completedLevel >= highestUnlockedLevel - 1)
-        // {
-        //    highestUnlockedLevel = Mathf.Min(completedLevel + 1, levelButtons.Length);
-        //   PlayerPrefs.SetInt("UnlockedLevel", highestUnlockedLevel);
-        //   PlayerPrefs.Save();
-        //   }
-        // UpdateAllButtons();
 
         if (completedLevel >= highestUnlockedLevel - 1)
         {
@@ -153,11 +142,11 @@ public class LevelSelectionManager : MonoBehaviour
     {
         if (levelNumber <= highestUnlockedLevel)
         {
+            SceneHistoryManager.Instance.RecordCurrentScene();
+
             SceneManager.LoadScene("Level" + levelNumber);
         }
     }
-
-    // Debug function - attach to a button
     public void DebugResetProgress()
     {
         PlayerPrefs.DeleteKey("UnlockedLevel");

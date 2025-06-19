@@ -331,6 +331,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &708302530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 708302531}
+  - component: {fileID: 708302532}
+  m_Layer: 0
+  m_Name: SceneHistoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &708302531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708302530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 233.08813, y: 416.81082, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &708302532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708302530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b852ac59a240a1b43bf01445d8132eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backButtonPrefab: {fileID: 2874607136152664994, guid: ac6b410e6c1291a4b8e79e4d69318845, type: 3}
+  ignoredScenes:
+  - UserSelection
+  - MainMenu
 --- !u!1 &752254249
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +601,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878888599}
   m_CullTransparentMesh: 1
+--- !u!1 &893335023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893335024}
+  - component: {fileID: 893335025}
+  m_Layer: 0
+  m_Name: BackButtonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &893335024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893335023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 233.08813, y: 416.81082, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893335025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893335023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b852ac59a240a1b43bf01445d8132eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backButtonPrefab: {fileID: 2874607136152664994, guid: ac6b410e6c1291a4b8e79e4d69318845, type: 3}
+  ignoredScenes:
+  - MainMenu
 --- !u!1 &1212324739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,6 +1142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usernameInput: {fileID: 878888601}
+  newUserButton: {fileID: 1788843146}
+  loadUserButton: {fileID: 1946129387}
 --- !u!1 &1459470197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,7 +1611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3731738790496792263, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 741.215
+      value: 946.61
       objectReference: {fileID: 0}
     - target: {fileID: 3731738790496792263, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1550,7 +1647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3731738790496792263, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1344
+      value: -1446.7
       objectReference: {fileID: 0}
     - target: {fileID: 3731738790496792263, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1567,6 +1664,14 @@ PrefabInstance:
     - target: {fileID: 7094450012582674138, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
       propertyPath: m_Name
       value: MainBackGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863911717115028543, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1039.605
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863911717115028543, guid: 642caaf782626ff43b9fde0413f12da4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2841.5452
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1661,9 +1766,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1420215798}
+      - m_Target: {fileID: 1420215793}
         m_TargetAssemblyTypeName: UserSelection, Assembly-CSharp
-        m_MethodName: OnNewGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1853,3 +1958,5 @@ SceneRoots:
   - {fileID: 1420215797}
   - {fileID: 607235943}
   - {fileID: 752254251}
+  - {fileID: 893335024}
+  - {fileID: 708302531}

@@ -5,6 +5,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public void OnStartPressed()
     {
+        SceneHistoryManager.Instance.RecordCurrentScene();
         // Load your game scene - replace "GameScene" with your actual scene name
         SceneManager.LoadScene("LevelSelection");
     }

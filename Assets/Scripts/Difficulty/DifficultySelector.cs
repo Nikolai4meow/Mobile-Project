@@ -1,6 +1,4 @@
-using UnityEngine;
 
-//DifficultySelector.cs
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
