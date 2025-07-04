@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using static DifficultySettings;
 
 public class SaveManager : MonoBehaviour
 {
@@ -75,4 +76,6 @@ public class SaveManager : MonoBehaviour
             allSaves.Add(data);
         }
     }
+    
+   
 }
