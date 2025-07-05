@@ -76,6 +76,7 @@ public class LevelSelectionManager : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     public void CompleteLevel(int completedLevel)
     {
         Debug.Log($"Completing level {completedLevel}. Current highest: {highestUnlockedLevel}");

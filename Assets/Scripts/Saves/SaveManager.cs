@@ -3,10 +3,14 @@ using System.IO;
 using System.Collections.Generic;
 using TMPro;
 using static DifficultySettings;
+using System;
 
 
 public class SaveManager : MonoBehaviour
 {
+    [SerializeField] private GameObject dailyRewardUIPrefab;
+    private DailyRewardUI rewardUIInstance;
+
     public static SaveManager Instance;
     public DifficultySettings difficultySettings;
     [SerializeField] private TMP_Text messageText;
@@ -27,6 +31,11 @@ public class SaveManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+        if (DailyRewardUI.Instance == null && dailyRewardUIPrefab != null)
+        {
+            var ui = Instantiate(dailyRewardUIPrefab);
+            rewardUIInstance = ui.GetComponent<DailyRewardUI>();
         }
     }
     public bool TryCreateNewUser(string username)
@@ -193,6 +202,96 @@ public class SaveManager : MonoBehaviour
     {
         return allSaves.Find(s => s.username == currentUser);
     }
+    public void CheckDailyReward(string username)
+    {
+        var userData = allSaves.Find(s => s.username == username);
+        if (userData == null) return;
+
+        DateTime today = DateTime.Today;
+        DateTime lastLogin = string.IsNullOrEmpty(userData.lastLoginDate)
+            ? today.AddDays(-1) // Force reward on first login
+            : DateTime.Parse(userData.lastLoginDate);
+
+        if (lastLogin < today)
+        {
+            // Update the date FIRST
+            userData.lastLoginDate = today.ToString("yyyy-MM-dd");
+
+            // Calculate reward
+            int rewardPoints = 1 + (userData.consecutiveLoginDays / 3);
+            userData.userScore += rewardPoints;
+
+            // FORCE SAVE (critical step)
+            SaveUserData(userData); // This was likely missing before
+
+            Debug.Log($"Saved lastLoginDate: {userData.lastLoginDate}");
+        }
+    }
+
+    private int CalculateDailyReward(int streak)
+    {
+        // Base reward + bonus for streak
+        int baseReward = 1;
+        int streakBonus = Mathf.FloorToInt(streak/ 3); // Extra point every 3 days
+
+        return baseReward + streakBonus;
+    }
+
+    private void ShowDailyRewardMessage(int points, int streak)
+    {
+        string message = $"Daily Reward: +{points} points!\n";
+        message += $"Login Streak: {streak} days";
+
+        if (DailyRewardUI.Instance != null)
+        {
+            DailyRewardUI.Instance.ShowReward(message, points);
+        }
+        else if (rewardUIInstance != null)
+        {
+            rewardUIInstance.ShowReward(message, points);
+        }
+        Debug.Log(message);
+    }
+
+    // Call this when loading a user
+    public void LoadUser(string username)
+    {
+        SetCurrentUser(username);
+        CheckDailyReward(username);
+        OnScoresUpdated(); // Refresh displays
+    }
+    private bool CheckForTimeCheat(DateTime lastLogin)
+    {
+        // If the last login appears to be in the future
+        if (lastLogin > DateTime.Today)
+        {
+            Debug.LogWarning("Potential time cheating detected!");
+            // Apply penalty or reset streak
+            return true;
+        }
+        return false;
+    }
+
+    [ContextMenu("Print Save Path")]
+    public void PrintSavePath()
+    {
+        Debug.Log($"Save files are located at:\n{savePath}");
+
+        if (Directory.Exists(savePath))
+        {
+            Debug.Log("Found these save files:");
+            foreach (string file in Directory.GetFiles(savePath, "*.json"))
+            {
+                Debug.Log(file);
+                Debug.Log(File.ReadAllText(file));
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Save directory doesn't exist yet!");
+        }
+    }
+
 
 
 }

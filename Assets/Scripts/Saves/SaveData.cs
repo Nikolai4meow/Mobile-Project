@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable] //  for Json
 public class SaveData
@@ -7,5 +8,8 @@ public class SaveData
     public int highestUnlockedLevel = 1;
     
     public int userScore = 0;
-   
+
+    [SerializeField] public string lastLoginDate;
+    public int consecutiveLoginDays;
+
 }
