@@ -6,6 +6,6 @@ public class SaveData
     public string username;
     public int highestUnlockedLevel = 1;
     
-    public Dictionary<string,int> levelScores = new Dictionary<string,int>();
+    public int userScore = 0;
    
 }
