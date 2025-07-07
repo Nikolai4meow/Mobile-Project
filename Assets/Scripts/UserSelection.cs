@@ -7,7 +7,6 @@ public class UserSelection : MonoBehaviour
 {
     public TMP_InputField usernameInput;
 
-    [System.Obsolete]
     public void OnNewGame()
     {
         SaveManager.Instance.SetCurrentUser(usernameInput.text);

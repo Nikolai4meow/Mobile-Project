@@ -3,13 +3,12 @@ using System.IO;
 using System.Collections.Generic;
 using TMPro;
 using static DifficultySettings;
-using System;
 
 
 public class SaveManager : MonoBehaviour
 {
-    
-    
+
+
 
     public static SaveManager Instance;
     public DifficultySettings difficultySettings;
@@ -17,7 +16,7 @@ public class SaveManager : MonoBehaviour
     private List<SaveData> allSaves = new List<SaveData>();
     private string currentUser;
     private string savePath;
-   private int scoreAdded;
+    private int scoreAdded;
 
     void Awake()
     {
@@ -32,7 +31,7 @@ public class SaveManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-       
+
     }
     public bool TryCreateNewUser(string username)
     {
@@ -93,7 +92,7 @@ public class SaveManager : MonoBehaviour
         if (messageText != null)
         {
             messageText.text = message;
-           
+
         }
         Debug.Log(message);
     }
@@ -136,7 +135,7 @@ public class SaveManager : MonoBehaviour
 
 
         DifficultySettings.Difficulty diff = DifficultySettings.Instance.currentDifficulty;
-       
+
         switch (diff) // to add gamescore based on the difficulty completed
         {
             case Difficulty.Easy:
@@ -149,9 +148,9 @@ public class SaveManager : MonoBehaviour
                 scoreAdded = 3;
                 break;
         }
-                //Update Score
-                userSave.userScore += scoreAdded;
-        
+        //Update Score
+        userSave.userScore += scoreAdded;
+
 
         // Save to file
         string json = JsonUtility.ToJson(userSave);
@@ -198,16 +197,6 @@ public class SaveManager : MonoBehaviour
     {
         return allSaves.Find(s => s.username == currentUser);
     }
-   
-
 }
-
-
-
- 
-   
-   
-
-
 
 

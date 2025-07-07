@@ -360,9 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b678dc55b906d4ab41171225454f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dailyRewardUIPrefab: {fileID: 2570335217353004771, guid: ac6ac4c6c25f5bb4ba89766e4fa19054, type: 3}
-  difficultySettings: {fileID: 0}
-  messageText: {fileID: 1223402878}
 --- !u!4 &752254251
 Transform:
   m_ObjectHideFlags: 0
