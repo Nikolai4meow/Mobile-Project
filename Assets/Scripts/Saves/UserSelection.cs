@@ -19,14 +19,12 @@ public class UserSelection : MonoBehaviour
             return;
         }
         SaveManager.Instance.SaveProgress(1);
-        SaveManager.Instance.LoadUser(newUsername);
         SceneManager.LoadScene("LevelSelection");
     }
 
     public void OnLoadGame()
     {
         SaveManager.Instance.SetCurrentUser(usernameInput.text);
-        SaveManager.Instance.LoadUser(usernameInput.text);
         SceneManager.LoadScene("LevelSelection");
     }
 }

@@ -9,7 +9,6 @@ public class SaveData
     
     public int userScore = 0;
 
-    [SerializeField] public string lastLoginDate;
-    public int consecutiveLoginDays;
+    
 
 }
