@@ -360,6 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b678dc55b906d4ab41171225454f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultySettings: {fileID: 0}
+  messageText: {fileID: 0}
 --- !u!4 &752254251
 Transform:
   m_ObjectHideFlags: 0

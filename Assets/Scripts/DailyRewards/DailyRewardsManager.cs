@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.SceneManagement;
 
 public class DailyRewardManager : MonoBehaviour
 {
-    
+
     // UI References (assign in Inspector)
     public GameObject DarkBackgroundPanel;
     public GameObject Rewards_Panel;
@@ -29,14 +30,14 @@ public class DailyRewardManager : MonoBehaviour
     }
     void Start()
     {
-        
+
         savePath = Path.Combine(Application.persistentDataPath, "saves");
         Directory.CreateDirectory(savePath);
         Debug.Log($"from the dailyrewardsmanager current user is {currentUser}");
 
         // Setup button listeners
         giftButton.onClick.AddListener(OnGiftButtonClicked);
-    
+
     }
 
     public void SetCurrentUser(string username)
@@ -47,10 +48,10 @@ public class DailyRewardManager : MonoBehaviour
     public void OnGiftButtonClicked()
     {
         //if (string.IsNullOrEmpty(currentUser))
-      //  {
-      //      Debug.LogError("No current user set!");
-       //     return;
-       // }
+        //  {
+        //      Debug.LogError("No current user set!");
+        //     return;
+        // }
 
         string filePath = Path.Combine(savePath, $"{currentUser}.json");
         SaveData saveData;
@@ -112,7 +113,7 @@ public class DailyRewardManager : MonoBehaviour
             saveData.lastLoginDate = DateTime.Today.ToString("yyyy-MM-dd");
             string json = JsonUtility.ToJson(saveData);
             File.WriteAllText(savePath + currentUser + ".json", json);
-            SaveManager.Instance.OnScoresUpdated();
+            OnScoresUpdated();
 
             File.WriteAllText(filePath, JsonUtility.ToJson(saveData));
 
@@ -122,6 +123,7 @@ public class DailyRewardManager : MonoBehaviour
             NoRewards_Panel.SetActive(false);
 
             Debug.Log($"Added 10 points. New score: {saveData.userScore}");
+           OnScoresUpdated();
         }
         finally
         {
@@ -133,13 +135,30 @@ public class DailyRewardManager : MonoBehaviour
         NoRewards_Panel.SetActive(false);
 
         StartCoroutine(EnableButtonAfterDelay(1f));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        OnScoresUpdated();
+        
 
     }
+
+
 
     IEnumerator EnableButtonAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         rewardClaimButton.interactable = true;
     }
-    
+
+
+    [System.Obsolete]
+    public void OnScoresUpdated()
+    {
+        // Call this whenever scores change
+        ScoreDisplay[] displays = FindObjectsOfType<ScoreDisplay>();
+        foreach (var display in displays)
+        {
+            display.UpdateScoreDisplay();
+        }
+
+    }
 }
