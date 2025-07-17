@@ -4,26 +4,35 @@ using System.IO;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SocialPlatforms;
 
 public class DailyRewardManager : MonoBehaviour
 {
+    
     // UI References (assign in Inspector)
     public GameObject DarkBackgroundPanel;
     public GameObject Rewards_Panel;
     public GameObject NoRewards_Panel;
     public Button rewardClaimButton; // The GREEN claim button
     public Button giftButton; // Your gift icon button in main UI
-
+    private SaveData saveData1;
 
 
     private bool isProcessingClaim = false;
     private string currentUser;
     private string savePath;
 
+    private void Awake()
+    {
+        saveData1 = SaveManager.Instance.GetCurrentUserData();
+        currentUser = saveData1.username;
+    }
     void Start()
     {
+        
         savePath = Path.Combine(Application.persistentDataPath, "saves");
         Directory.CreateDirectory(savePath);
+        Debug.Log($"from the dailyrewardsmanager current user is {currentUser}");
 
         // Setup button listeners
         giftButton.onClick.AddListener(OnGiftButtonClicked);
@@ -101,6 +110,8 @@ public class DailyRewardManager : MonoBehaviour
             // Add EXACTLY 10 points
             saveData.userScore += 10;
             saveData.lastLoginDate = DateTime.Today.ToString("yyyy-MM-dd");
+            string json = JsonUtility.ToJson(saveData);
+            File.WriteAllText(savePath + currentUser + ".json", json);
             SaveManager.Instance.OnScoresUpdated();
 
             File.WriteAllText(filePath, JsonUtility.ToJson(saveData));
