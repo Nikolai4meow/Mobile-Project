@@ -5357,6 +5357,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2027548583}
+        m_TargetAssemblyTypeName: SceneResetter, Assembly-CSharp
+        m_MethodName: ResetScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1809027650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6202,6 +6214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2027548582}
   - component: {fileID: 2027548581}
+  - component: {fileID: 2027548583}
   m_Layer: 0
   m_Name: DailyRewardManager
   m_TagString: Untagged
@@ -6226,8 +6239,6 @@ MonoBehaviour:
   NoRewards_Panel: {fileID: 1598519289}
   rewardClaimButton: {fileID: 1809027649}
   giftButton: {fileID: 2027745717}
-  scoreDisplay: {fileID: 1124844627}
-  scoreText: {fileID: 1302842101}
 --- !u!4 &2027548582
 Transform:
   m_ObjectHideFlags: 0
@@ -6243,6 +6254,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2027548583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027548580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7999b5959fdb93f428d5dfaf2d053669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetDelay: 0.5
+  resetButton: {fileID: 1809027649}
 --- !u!1 &2027745715
 GameObject:
   m_ObjectHideFlags: 0

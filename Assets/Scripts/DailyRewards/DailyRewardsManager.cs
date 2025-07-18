@@ -128,6 +128,8 @@ public class DailyRewardManager : MonoBehaviour
         finally
         {
             isProcessingClaim = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            OnScoresUpdated();
         }
 
         DarkBackgroundPanel.SetActive(false);
@@ -139,6 +141,14 @@ public class DailyRewardManager : MonoBehaviour
         OnScoresUpdated();
         
 
+    }
+
+    IEnumerator ResetSceneWithDelay(float delay = 0.5f)
+    {
+        
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
