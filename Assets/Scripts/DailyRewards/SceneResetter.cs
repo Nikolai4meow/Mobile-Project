@@ -6,7 +6,7 @@ using UnityEngine.UI; // Required for Button interaction
 public class SceneResetter : MonoBehaviour
 {
     [SerializeField] private float resetDelay = 0.5f;
-    [SerializeField] private Button resetButton; // Assign in Inspector
+    [SerializeField] private Button resetButton; 
 
     void Start()
     {
