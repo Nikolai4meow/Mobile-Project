@@ -8,10 +8,12 @@ public class ScoreDisplay : MonoBehaviour
 
 {
     [SerializeField] private TMP_Text scoreText;
+    public static ScoreDisplay instance;
 
     private void OnEnable()
     {
         UpdateScoreDisplay();
+        instance = this;
     }
 
     public void UpdateScoreDisplay()
@@ -48,4 +50,5 @@ public class ScoreDisplay : MonoBehaviour
             scoreText.text = "Score: Error";
         }
     }
+   
 }

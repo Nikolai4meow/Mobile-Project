@@ -35,7 +35,7 @@ public class DifficultySettings : ScriptableObject
     }
 
     // Helper property to get current score value
-    public int CurrentScoreValue
+   /* public int CurrentScoreValue
     {
         get
         {
@@ -47,5 +47,5 @@ public class DifficultySettings : ScriptableObject
                 default: return mediumScore;
             }
         }
-    }
+   } */
 }

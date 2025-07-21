@@ -18,12 +18,18 @@ public class UserSelection : MonoBehaviour
             return;
         }
         SaveManager.Instance.SaveProgress(1);
+
         SceneManager.LoadScene("LevelSelection");
     }
 
     public void OnLoadGame()
     {
         SaveManager.Instance.SetCurrentUser(usernameInput.text);
+        if (SaveManager.Instance.CheckUserDoesNotExist(usernameInput.text))
+        {
+            Debug.Log("User doesn't exist - aborting operation");
+            return;
+        }
         SceneManager.LoadScene("LevelSelection");
     }
 }

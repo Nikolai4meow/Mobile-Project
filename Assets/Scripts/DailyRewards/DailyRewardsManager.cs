@@ -27,6 +27,11 @@ public class DailyRewardManager : MonoBehaviour
     {
         saveData1 = SaveManager.Instance.GetCurrentUserData();
         currentUser = saveData1.username;
+        
+            if (string.IsNullOrEmpty(savePath))
+            {
+                savePath = Path.Combine(Application.persistentDataPath, "saves");
+            }
     }
     void Start()
     {
@@ -42,52 +47,117 @@ public class DailyRewardManager : MonoBehaviour
 
     public void SetCurrentUser(string username)
     {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            throw new System.ArgumentNullException("username cannot be null or empty");
+        }
         currentUser = username;
     }
 
     public void OnGiftButtonClicked()
     {
-        //if (string.IsNullOrEmpty(currentUser))
-        //  {
-        //      Debug.LogError("No current user set!");
-        //     return;
-        // }
-
-        string filePath = Path.Combine(savePath, $"{currentUser}.json");
-        SaveData saveData;
-
-        // Load or create new save
-        if (File.Exists(filePath))
+        if (string.IsNullOrEmpty(currentUser))
         {
-            saveData = JsonUtility.FromJson<SaveData>(File.ReadAllText(filePath));
-        }
-        else
-        {
-            saveData = new SaveData
+            // Try to load from PlayerPrefs as fallback
+            currentUser = PlayerPrefs.GetString("CurrentUser");
+
+            if (string.IsNullOrEmpty(currentUser))
             {
-                username = currentUser,
-                userScore = 0,
-                highestUnlockedLevel = 1,
-                lastLoginDate = ""
-            };
+                Debug.LogError("No current user set! Please create or select a user first.");
+                return;
+            }
         }
 
+        // 2. Verify save directory exists
+        try
+        {
+            if (!Directory.Exists(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Failed to access save directory: {e.Message}");
+            return;
+        }
+
+        // 3. Build file path safely
+        string filePath;
+        try
+        {
+            filePath = Path.Combine(savePath, $"{currentUser}.json");
+            if (string.IsNullOrEmpty(filePath))
+            {
+                throw new System.Exception("Generated file path is invalid");
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Failed to create file path: {e.Message}");
+            return;
+        }
+
+        // 4. Load or create save data
+        SaveData saveData;
+        try
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                saveData = JsonUtility.FromJson<SaveData>(json);
+            }
+            else
+            {
+                saveData = new SaveData
+                {
+                    username = currentUser,
+                    userScore = 0,
+                    highestUnlockedLevel = 1,
+                    lastLoginDate = ""
+                };
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Failed to load/create save data: {e.Message}");
+            return;
+        }
+
+        // 5. Date comparison
         DateTime today = DateTime.Today;
-        DateTime lastLogin = string.IsNullOrEmpty(saveData.lastLoginDate)
-            ? today.AddDays(-1) // Force reward panel on first time
-            : DateTime.Parse(saveData.lastLoginDate);
+        DateTime lastLogin;
 
-        // Show appropriate panel
-        DarkBackgroundPanel.SetActive(true);
-        if (lastLogin.Date < today.Date)
+        try
         {
-            Rewards_Panel.SetActive(true);
-            NoRewards_Panel.SetActive(false);
+            lastLogin = string.IsNullOrEmpty(saveData.lastLoginDate)
+                ? today.AddDays(-1)
+                : DateTime.Parse(saveData.lastLoginDate);
         }
-        else
+        catch (System.Exception e)
         {
-            NoRewards_Panel.SetActive(true);
-            Rewards_Panel.SetActive(false);
+            Debug.LogError($"Failed to parse login date: {e.Message}");
+            lastLogin = today.AddDays(-1); // Default to force reward
+        }
+
+        // 6. Show appropriate panel
+        try
+        {
+            DarkBackgroundPanel.SetActive(true);
+            if (lastLogin.Date < today.Date)
+            {
+                Rewards_Panel.SetActive(true);
+                NoRewards_Panel.SetActive(false);
+            }
+            else
+            {
+                NoRewards_Panel.SetActive(true);
+                Rewards_Panel.SetActive(false);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Failed to update UI: {e.Message}");
         }
     }
 
@@ -163,12 +233,14 @@ public class DailyRewardManager : MonoBehaviour
     [System.Obsolete]
     public void OnScoresUpdated()
     {
+       ScoreDisplay.instance.UpdateScoreDisplay();
         // Call this whenever scores change
         ScoreDisplay[] displays = FindObjectsOfType<ScoreDisplay>();
         foreach (var display in displays)
         {
             display.UpdateScoreDisplay();
         }
+
 
     }
 }

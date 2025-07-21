@@ -29,6 +29,7 @@ public class SaveManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public bool TryCreateNewUser(string username)
     {
         // Check if username is empty
@@ -45,16 +46,19 @@ public class SaveManager : MonoBehaviour
             Debug.Log($"User '{username}' already exists");
             return false;
         }
-
         // Create new user
-        SetCurrentUser(username);
+        if (!SetCurrentUser(username)) // Modified this line
+        {
+            return false;
+        }
 
         // Initialize new user data
         var newUser = new SaveData
         {
             username = username,
             highestUnlockedLevel = 1,
-            userScore = 0
+            userScore = 0,
+            lastLoginDate = "" // Add this line to initialize the date field
         };
 
         allSaves.Add(newUser);
@@ -65,7 +69,24 @@ public class SaveManager : MonoBehaviour
         return true;
     }
 
-    private bool UserExists(string username)
+    public bool CheckUserDoesNotExist(string username)
+    {
+        // First check in memory
+        bool existsInMemory = allSaves.Exists(s => s.username == username);
+        if (existsInMemory)
+        {
+            return false;
+        }
+
+        // Then check in files
+        string filePath = Path.Combine(savePath, $"{username}.json");
+        bool existsInFiles = File.Exists(filePath);
+
+        // Return true if user DOES NOT exist in either location
+        return !existsInFiles;
+    }
+
+    public bool UserExists(string username)
     {
         // Check both in memory and in saved files
         bool inMemory = allSaves.Exists(s => s.username == username);
@@ -94,19 +115,19 @@ public class SaveManager : MonoBehaviour
     }
 
     // Call this when creating/selecting a user
-    public void SetCurrentUser(string username)
+    public bool SetCurrentUser(string username)
     {
-        if (!UserExists(username))
+        if (string.IsNullOrWhiteSpace(username))
         {
-            Debug.LogError($"Tried to set non-existent user: {username}");
-            ShowMessage("User not found!");
-            return;
+            Debug.LogError("Username cannot be null or empty!");
+            return false;
         }
 
         currentUser = username;
         PlayerPrefs.SetString("CurrentUser", username);
         PlayerPrefs.Save();
         Debug.Log($"Current user set to: {username}");
+        return true;
     }
 
     [System.Obsolete]
@@ -145,7 +166,7 @@ public class SaveManager : MonoBehaviour
                 break;
         }
                 //Update Score
-                userSave.userScore += scoreAdded;
+               userSave.userScore += scoreAdded;
         
 
         // Save to file
@@ -167,15 +188,30 @@ public class SaveManager : MonoBehaviour
         if (!Directory.Exists(savePath))
         {
             Directory.CreateDirectory(savePath);
+            Debug.Log("Created new saves directory");
             return;
         }
 
-        // Load all save files
+        // Clear existing data
+        allSaves.Clear();
+
+        // Load all save files with error handling
         foreach (string file in Directory.GetFiles(savePath, "*.json"))
         {
-            string json = File.ReadAllText(file);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
-            allSaves.Add(data);
+            try
+            {
+                string json = File.ReadAllText(file);
+                SaveData data = JsonUtility.FromJson<SaveData>(json);
+                if (data != null)
+                {
+                    allSaves.Add(data);
+                    Debug.Log($"Loaded user: {data.username}");
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Failed to load save file {file}: {e.Message}");
+            }
         }
     }
 
@@ -191,8 +227,21 @@ public class SaveManager : MonoBehaviour
     }
     public SaveData GetCurrentUserData()
     {
-        return allSaves.Find(s => s.username == currentUser);
+        LoadAllUsers();
+        if (string.IsNullOrEmpty(currentUser))
+        {
+            Debug.LogWarning("No current user set when trying to get user data");
+            return null;
+        }
+
+        var userData = allSaves.Find(s => s.username == currentUser);
+        if (userData == null)
+        {
+            Debug.LogError($"Current user '{currentUser}' not found in loaded saves");
+        }
+        return userData;
     }
+    
 
 
 }
