@@ -153,19 +153,19 @@ public class SaveManager : MonoBehaviour
 
         DifficultySettings.Difficulty diff = DifficultySettings.Instance.currentDifficulty;
 
-        //switch (diff) // to add gamescore based on the difficulty completed
-        //{
-        //    case Difficulty.Easy:
-        //        scoreAdded = 1;
-        //        break;
-        //    case Difficulty.Medium:
-        //        scoreAdded = 2;
-        //        break;
-        //    case Difficulty.Hard:
-        //        scoreAdded = 3;
-        //        break;
-        //}
-        //Update Score
+        switch (diff) // to add gamescore based on the difficulty completed
+        {
+            case Difficulty.Easy:
+                scoreAdded = 1;
+                break;
+            case Difficulty.Medium:
+                scoreAdded = 2;
+                break;
+            case Difficulty.Hard:
+                scoreAdded = 3;
+                break;
+        }
+       // Update Score
         userSave.userScore += scoreAdded;
         
 
