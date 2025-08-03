@@ -4522,6 +4522,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6742557686637266814, guid: dbe039b0a12f7b74bb29f83b75fed21c, type: 3}
+      propertyPath: difficultySettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 527aeb2f5d439774f97dfece602a59ec, type: 2}
     - target: {fileID: 8954507115956258663, guid: dbe039b0a12f7b74bb29f83b75fed21c, type: 3}
       propertyPath: m_Name
       value: Exit (win)

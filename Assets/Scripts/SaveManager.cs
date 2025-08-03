@@ -11,7 +11,7 @@ public class SaveManager : MonoBehaviour
     public DifficultySettings difficultySettings;
     [SerializeField] private TMP_Text messageText;
     private List<SaveData> allSaves = new List<SaveData>();
-    private string currentUser;
+    public string currentUser;
     private string savePath;
    private int scoreAdded;
 
@@ -96,7 +96,7 @@ public class SaveManager : MonoBehaviour
         return File.Exists(filePath);
     }
 
-    private void SaveUserData(SaveData data)
+    public void SaveUserData(SaveData data)
     {
         Directory.CreateDirectory(savePath);
         string filePath = Path.Combine(savePath, $"{data.username}.json");
@@ -150,30 +150,29 @@ public class SaveManager : MonoBehaviour
 
 
 
+      //  DifficultySettings.Difficulty diff = DifficultySettings.Instance.currentDifficulty;
 
-        DifficultySettings.Difficulty diff = DifficultySettings.Instance.currentDifficulty;
-
-        switch (diff) // to add gamescore based on the difficulty completed
-        {
-            case Difficulty.Easy:
-                scoreAdded = 1;
-                break;
-            case Difficulty.Medium:
-                scoreAdded = 2;
-                break;
-            case Difficulty.Hard:
-                scoreAdded = 3;
-                break;
-        }
+      //  switch (diff) // to add gamescore based on the difficulty completed
+       // {
+       //     case Difficulty.Easy:
+       //         scoreAdded = 1;
+       //         break;
+        //    case Difficulty.Medium:
+        //        scoreAdded = 2;
+         //       break;
+        //    case Difficulty.Hard:
+         //       scoreAdded = 3;
+         //       break;
+       // }
        // Update Score
-        userSave.userScore += scoreAdded;
+     //   userSave.userScore += scoreAdded;
         
 
         // Save to file
-        string json = JsonUtility.ToJson(userSave);
-        File.WriteAllText(savePath + currentUser + ".json", json);
+     //   string json = JsonUtility.ToJson(userSave);
+      //  File.WriteAllText(savePath + currentUser + ".json", json);
 
-        OnScoresUpdated();
+       // OnScoresUpdated();
     }
 
     public int LoadUserProgress()
