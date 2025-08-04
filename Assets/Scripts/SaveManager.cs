@@ -147,32 +147,6 @@ public class SaveManager : MonoBehaviour
             userSave.highestUnlockedLevel = levelReached;
         }
 
-
-
-
-      //  DifficultySettings.Difficulty diff = DifficultySettings.Instance.currentDifficulty;
-
-      //  switch (diff) // to add gamescore based on the difficulty completed
-       // {
-       //     case Difficulty.Easy:
-       //         scoreAdded = 1;
-       //         break;
-        //    case Difficulty.Medium:
-        //        scoreAdded = 2;
-         //       break;
-        //    case Difficulty.Hard:
-         //       scoreAdded = 3;
-         //       break;
-       // }
-       // Update Score
-     //   userSave.userScore += scoreAdded;
-        
-
-        // Save to file
-     //   string json = JsonUtility.ToJson(userSave);
-      //  File.WriteAllText(savePath + currentUser + ".json", json);
-
-       // OnScoresUpdated();
     }
 
     public int LoadUserProgress()

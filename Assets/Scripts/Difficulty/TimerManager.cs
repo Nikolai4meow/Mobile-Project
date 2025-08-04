@@ -60,7 +60,7 @@ public class TimerManager : MonoBehaviour
         }
     }
 
-    // Rest of your existing methods...
+
     private void Update()
     {
         if (timerActive)
@@ -87,7 +87,7 @@ public class TimerManager : MonoBehaviour
         }
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
