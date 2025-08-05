@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     {
         if (!isMoving) // move only when the player is not moving
         {
-                moveDirection = direction.normalized; // gives move speed
-                isMoving = true;
+            moveDirection = direction.normalized; // gives move speed
+            isMoving = true;
         }
     }
     
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Zombie"))
         {
-           StopMoving();
+            StopMoving();
 
             ZombieController zombie = collision.gameObject.GetComponent<ZombieController>();
             if (zombie != null)
@@ -61,5 +61,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-
-
