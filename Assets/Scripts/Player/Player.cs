@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     {
         isMoving = false;
         AudioManager.Instance.PlaySound("Crubling");
-        AnimationManager.Instance.PlayAnimation("Girl Idle", "Girl");
+        
     }
 
     void FixedUpdate()

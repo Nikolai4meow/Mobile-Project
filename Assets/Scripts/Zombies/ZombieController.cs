@@ -32,7 +32,7 @@ public class ZombieController : MonoBehaviour
 
         currentHits++;
         AudioManager.Instance.PlaySound("Swing");
-        AnimationManager.Instance.PlayAnimation("Girl Attack", "Girl");
+       
 
         if (currentHits < zombieData.hitsToKill)
         {

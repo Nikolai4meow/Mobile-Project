@@ -16,7 +16,7 @@ public class Music : MonoBehaviour
     public AudioClip Zombies;
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     public void PlaySFX(AudioClip clip)

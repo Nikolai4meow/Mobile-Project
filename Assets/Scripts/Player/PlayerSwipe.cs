@@ -32,25 +32,25 @@ public class PlayerSwipe : MonoBehaviour
             {
                 player.SetMoveDirection(Vector3.forward);
                 AudioManager.Instance.PlaySound("Slide");
-                AnimationManager.Instance.PlayAnimation("Girl Slide", "Girl");
+                
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 player.SetMoveDirection(Vector3.back);
                 AudioManager.Instance.PlaySound("Slide");
-                AnimationManager.Instance.PlayAnimation("Girl Slide", "Girl");
+                
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
                 player.SetMoveDirection(Vector3.left);
                 AudioManager.Instance.PlaySound("Slide");
-                AnimationManager.Instance.PlayAnimation("Girl Slide", "Girl");
+                
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 player.SetMoveDirection(Vector3.right);
                 AudioManager.Instance.PlaySound("Slide");
-                AnimationManager.Instance.PlayAnimation("Girl Slide", "Girl");
+                
             }
         }
     }
