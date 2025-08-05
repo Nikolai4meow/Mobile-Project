@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     public void StopMoving()
     {
         isMoving = false;
+        AudioManager.Instance.PlaySound("Crubling");
+        AnimationManager.Instance.PlayAnimation("Girl Idle", "Girl");
     }
 
     void FixedUpdate()
@@ -57,6 +59,7 @@ public class Player : MonoBehaviour
             if (zombie != null)
             {
                 zombie.TakeDamage();
+
             }
         }
     }

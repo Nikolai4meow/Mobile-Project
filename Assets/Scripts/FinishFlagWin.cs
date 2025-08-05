@@ -66,6 +66,8 @@ public class FinishFlagWin : MonoBehaviour
 
        
         LevelManager.Instance.ShowLevelComplete();
+        AudioManager.Instance.PlaySound("Cheer");
+
     }
 }
 

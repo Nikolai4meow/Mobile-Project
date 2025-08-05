@@ -91,6 +91,7 @@ public class TimerManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
+        AudioManager.Instance.PlaySound("Death");
     }
 
     public void RestartLevel()

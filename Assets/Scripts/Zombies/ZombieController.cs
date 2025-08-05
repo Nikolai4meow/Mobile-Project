@@ -31,6 +31,8 @@ public class ZombieController : MonoBehaviour
         if (meshRenderer == null || zombieMaterial == null) return;
 
         currentHits++;
+        AudioManager.Instance.PlaySound("Swing");
+        AnimationManager.Instance.PlayAnimation("Girl Attack", "Girl");
 
         if (currentHits < zombieData.hitsToKill)
         {
@@ -39,6 +41,7 @@ public class ZombieController : MonoBehaviour
                 StopCoroutine(flashRoutine);
             }
             flashRoutine = StartCoroutine(FlashRed());
+            AudioManager.Instance.PlaySound("Zombie Hit");
         }
         else
         {
@@ -60,6 +63,7 @@ public class ZombieController : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        AudioManager.Instance.PlaySound("Zombie Die");
     }
 
     void OnDestroy()
