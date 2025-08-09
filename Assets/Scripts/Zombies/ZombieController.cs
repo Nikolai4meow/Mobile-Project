@@ -20,7 +20,6 @@ public class ZombieController : MonoBehaviour
             return;
         }
 
-        // Create a new material instance to avoid changing the original asset
         zombieMaterial = new Material(meshRenderer.material);
         meshRenderer.material = zombieMaterial;
         originalColor = zombieMaterial.color;
@@ -51,11 +50,11 @@ public class ZombieController : MonoBehaviour
 
     private IEnumerator FlashRed()
     {
-        // Flash to red
+        
         zombieMaterial.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
-        // Return to original color
+        
         zombieMaterial.color = originalColor;
         flashRoutine = null;
     }
@@ -68,7 +67,7 @@ public class ZombieController : MonoBehaviour
 
     void OnDestroy()
     {
-        // Clean up the material instance when destroyed
+        
         if (zombieMaterial != null)
         {
             Destroy(zombieMaterial);

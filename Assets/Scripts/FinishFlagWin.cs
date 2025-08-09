@@ -59,7 +59,7 @@ public class FinishFlagWin : MonoBehaviour
 
         
         userSave.userScore += scoreToAdd;
-        SaveManager.Instance.SaveUserData(userSave); // Use the SaveManager's method
+        SaveManager.Instance.SaveUserData(userSave);
         SaveManager.Instance.OnScoresUpdated();
 
         Debug.Log($"Added {scoreToAdd} points! Total: {userSave.userScore}");

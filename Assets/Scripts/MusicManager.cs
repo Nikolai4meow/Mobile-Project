@@ -44,10 +44,9 @@ public class MusicManager : MonoBehaviour
 
     private void PlaySceneMusic(string sceneName)
     {
-        // Stop any currently playing music
+        
         audioSource.Stop();
 
-        // Find music for this scene
         foreach (var sceneMusic in sceneMusicList)
         {
             if (sceneMusic.sceneName == sceneName && sceneMusic.musicClip != null)
